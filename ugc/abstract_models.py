@@ -1,11 +1,11 @@
 from django.db import models
 
 # Create your models here.
-from models import User
+from core.models import User
 
 
 class Authored(models.Model):
-    author = models.ForeignKey(User, verbose_name="author")
+    author = models.ForeignKey(User, verbose_name="author", related_name="author")
 
     class Meta:
         abstract = True
@@ -26,6 +26,4 @@ class UpdatedAt(models.Model):
 
 
 class Dated(CreatedAt, UpdatedAt):
-    class Meta:
-        abstract = True
-
+    pass

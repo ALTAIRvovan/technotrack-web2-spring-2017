@@ -5,12 +5,11 @@ from ugc.abstract_models import Authored, CreatedAt
 from core.models import User
 
 
-class Chat(models.Model, Authored, CreatedAt):
+class Chat(Authored, CreatedAt, models.Model):
     members = models.ManyToManyField(
         User,
-        related_name="chats",
-        related_query_name="chat",
-        through=ChatMembership,
+        #related_name="chats",
+        through="ChatMembership",
         through_fields=('chat', 'user'),
         verbose_name="chat members list"
     )
@@ -20,17 +19,17 @@ class Chat(models.Model, Authored, CreatedAt):
     )
 
 
-class ChatMembership(models.Model, CreatedAt):
+class ChatMembership(CreatedAt, models.Model):
     chat = models.ForeignKey(Chat)
     user = models.ForeignKey(User)
     inviter = models.ForeignKey(
         User,
-        # Todo: RelatedName
+        related_name="inviter",
         verbose_name="chat inviter"
     )
 
 
-class Message(models.Model, Authored, CreatedAt):
+class Message(Authored, CreatedAt, models.Model):
     chat = models.ForeignKey(Chat, verbose_name="chat")
     subject = models.CharField(max_length=255, verbose_name="message subject")
     text = models.CharField(max_length=1024, verbose_name="message text")
