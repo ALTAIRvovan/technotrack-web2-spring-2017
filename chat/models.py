@@ -8,7 +8,7 @@ from core.models import User
 class Chat(Authored, CreatedAt, models.Model):
     members = models.ManyToManyField(
         User,
-        #related_name="chats",
+        related_name="chats",
         through="ChatMembership",
         through_fields=('chat', 'user'),
         verbose_name="chat members list"

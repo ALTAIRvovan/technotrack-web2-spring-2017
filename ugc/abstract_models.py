@@ -5,7 +5,7 @@ from core.models import User
 
 
 class Authored(models.Model):
-    author = models.ForeignKey(User, verbose_name="author", related_name="author")
+    author = models.ForeignKey(User, verbose_name="author")
 
     class Meta:
         abstract = True
