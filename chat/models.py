@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from ugc.models import Authored, CreatedAt
+from ugc.abstract_models import Authored, CreatedAt
 from core.models import User
 
 

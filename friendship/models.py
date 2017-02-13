@@ -1,7 +1,7 @@
 from django.db import models
 
 from core.models import User
-from ugc.models import Authored, Dated
+from ugc.abstract_models import Authored, Dated
 
 
 class FriendShip(models.Model, Authored, Dated):

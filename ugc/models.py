@@ -1,30 +1,7 @@
 from django.db import models
 
-# Create your models here.
-from models import User
+from abstract_models import Authored, Dated
 
 
-class Authored(models.Model):
-    author = models.ForeignKey(User)
-
-    class Meta:
-        abstract = True
-
-
-class CreatedAt(models.Model):
-    created_at = models.DateTimeField()
-
-    class Meta:
-        abstract = True
-
-
-class UpdatedAt(models.Model):
-    updated_at = models.DateTimeField()
-
-    class Meta:
-        abstract = True
-
-
-class Dated(CreatedAt, UpdatedAt):
-    class Meta:
-        abstract = True
+class Post(models.Model, Authored, Dated):
+    text = models.CharField(max_length=1024)
