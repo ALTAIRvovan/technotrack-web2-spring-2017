@@ -10,6 +10,7 @@ class FriendShip(Authored, Dated, models.Model):
 
 
 # TODO: Тут что-то надо делать =(
+# TODO: Добавить класс Meta и verbose_name в нем
 class Friends(models.Model):
     friendShip = models.ForeignKey(FriendShip, verbose_name="friendship")
     user = models.ForeignKey(User, related_name="friends", verbose_name="user")

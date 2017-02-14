@@ -34,5 +34,5 @@ class ChatMembership(CreatedAt, models.Model):
 
 class Message(Authored, CreatedAt, models.Model):
     chat = models.ForeignKey(Chat, verbose_name="chat")
-    subject = models.CharField(max_length=255, verbose_name="message subject")
+    subject = models.CharField(default="", max_length=255, verbose_name="message subject")
     text = models.CharField(max_length=1024, verbose_name="message text")
