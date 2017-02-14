@@ -18,6 +18,9 @@ class Chat(Authored, CreatedAt, models.Model):
         verbose_name="chat name"
     )
 
+    def __str__(self):
+        return self.name
+
 
 class ChatMembership(CreatedAt, models.Model):
     chat = models.ForeignKey(Chat)
