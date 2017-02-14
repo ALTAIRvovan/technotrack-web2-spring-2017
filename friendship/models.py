@@ -13,4 +13,4 @@ class FriendShip(Authored, Dated, models.Model):
 class Friends(models.Model):
     friendShip = models.ForeignKey(FriendShip, verbose_name="friendship")
     user = models.ForeignKey(User, related_name="friends", verbose_name="user")
-    friend = models.ForeignKey(User, related_name="friends2", verbose_name="friend")
+    friend = models.ForeignKey(User, related_name="+", verbose_name="friend")
