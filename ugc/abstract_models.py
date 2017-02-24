@@ -30,3 +30,8 @@ class UpdatedAt(models.Model):
 class Dated(CreatedAt, UpdatedAt):
     class Meta:
         abstract = True
+
+
+class LikeAble(models.Model):
+    class Meta:
+        abstract = True
