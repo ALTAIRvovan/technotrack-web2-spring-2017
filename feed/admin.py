@@ -4,4 +4,4 @@ from .models import Feed
 
 @admin.register(Feed)
 class FeedAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('author', 'content_object', 'updated_at')
