@@ -9,6 +9,9 @@ from feed.abstract_models import FeedAble
 class Post(Authored, Dated, FeedAble, LikeAble, models.Model):
     text = models.CharField(max_length=1024, verbose_name="post text")
 
+    def feed_author(self):
+        return self.author
+
     class Meta:
         abstract = False
 

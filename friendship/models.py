@@ -16,3 +16,6 @@ class Friends(FeedAble, models.Model):
     friendShip = models.ForeignKey(FriendShip, verbose_name="friendship")
     user = models.ForeignKey(User, related_name="friends", verbose_name="user")
     friend = models.ForeignKey(User, related_name="+", verbose_name="friend")
+
+    def feed_author(self):
+        return self.user

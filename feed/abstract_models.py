@@ -10,5 +10,9 @@ class FeedAble(models.Model):
         pass
     """
 
+    @abstractmethod
+    def feed_author(self):
+        pass
+
     class Meta:
         abstract = True
