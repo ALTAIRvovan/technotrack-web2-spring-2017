@@ -1,0 +1,10 @@
+language: python
+python:
+  - "3.5"
+services:
+  - mysql
+
+install: "pip install -r requirements.txt"
+before_script:
+  - cp conf/test.conf ../django.conf
+script: python ./manage.py test
