@@ -15,7 +15,6 @@ before_script:
   - cp conf/test.conf ../django.conf
 script:
   - python ./manage.py test
-  - coverage run manage.py test
+  - coverage run --source='.' manage.py test
 after_success:
   - coverage report
-  - coveralls
