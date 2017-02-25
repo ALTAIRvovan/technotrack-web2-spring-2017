@@ -7,7 +7,7 @@ from feed.abstract_models import FeedAble
 
 class FriendShip(Authored, Dated, models.Model):
     recipient = models.ForeignKey(User, related_name="friend_applications", verbose_name="user responded request")
-    approved = models.BooleanField(verbose_name="is approved")
+    approved = models.BooleanField(verbose_name="is approved", default=False)
 
 
 # TODO: Тут что-то надо делать =(
