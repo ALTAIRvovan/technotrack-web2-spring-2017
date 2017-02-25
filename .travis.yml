@@ -4,7 +4,18 @@ python:
 services:
   - mysql
 
-install: "pip install -r requirements.txt"
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+install:
+  - pip install -r requirements.txt
+  - pip install coverage coveralls mock
 before_script:
   - cp conf/test.conf ../django.conf
-script: python ./manage.py test
+script:
+  - python ./manage.py test
+  - coverage run manage.py test allauth
+after_success:
+  - coverage report
+  - coveralls
