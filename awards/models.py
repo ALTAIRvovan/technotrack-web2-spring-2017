@@ -18,9 +18,9 @@ class BaseAward(models.Model):
 
 
 class PopularUser(BaseAward):
-    name = "popular_user"
-    award_name = "Популярный пользователь"
-    award_description = "Дается пользователям , получившим 500 лайков"
+    add_name = "popular_user"
+    add_award_name = "Популярный пользователь"
+    add_award_description = "Дается пользователям , получившим 500 лайков"
     @classmethod
     def get_award(cls):
         return {

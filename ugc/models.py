@@ -4,6 +4,7 @@ from django.db import models
 
 from ugc.abstract_models import Authored, Dated, LikeAble
 from feed.abstract_models import FeedAble
+from awards.models import BaseAward
 
 
 class Post(Authored, Dated, FeedAble, LikeAble, models.Model):
@@ -23,3 +24,16 @@ class Like(Authored, Dated, models.Model):
 
     class Meta:
         unique_together = ("target_type", "target_id", "author")
+
+
+class LikeAward(BaseAward):
+    @classmethod
+    def get_award(cls):
+        return {
+            "name": "like_100",
+            "award_name": "Любимый",
+            "award_description": "Дается при получении 100 лайков"
+        }
+
+    class Meta:
+        proxy = True
