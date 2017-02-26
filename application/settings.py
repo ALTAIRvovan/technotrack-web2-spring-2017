@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'ugc',
     'friendship',
     'feed',
-    'chat'
+    'chat',
+    'awards'
 ]
 
 MIDDLEWARE = [
