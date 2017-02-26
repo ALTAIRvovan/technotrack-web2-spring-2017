@@ -27,6 +27,14 @@ class Like(Authored, Dated, models.Model):
 
 
 class LikeAward(BaseAward):
+    name = "like_100"
+
+    @staticmethod
+    def handle_post_save(sender, instance, created, raw, using, update_fields, **kwargs):
+        if isinstance(instance, Like) and created:
+            if Like.objects.filter(target_object=instance.target_object).count() == 100:
+                BaseAward.objects.get(name=LikeAward.name).users.add(instance.author)
+
     @classmethod
     def get_award(cls):
         return {

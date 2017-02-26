@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from abc import abstractstaticmethod, abstractclassmethod
+from friendship.models import Friends
 
 
 class BaseAward(models.Model):
@@ -13,14 +14,18 @@ class BaseAward(models.Model):
     def get_award(cls):
         pass
 
+    @staticmethod
+    @abstractstaticmethod
+    def handle_post_save(sender, instance, created, raw, using, update_fields, **kwargs):
+        pass
+
     class Meta:
         db_table = 'awards'
 
 
 class PopularUser(BaseAward):
-    add_name = "popular_user"
-    add_award_name = "Популярный пользователь"
-    add_award_description = "Дается пользователям , получившим 500 лайков"
+    name = "popular_user"
+
     @classmethod
     def get_award(cls):
         return {
@@ -28,6 +33,12 @@ class PopularUser(BaseAward):
             "award_name": "Популярный пользователь",
             "award_description": "Дается пользователям , получившим 500 лайков"
         }
+
+    @staticmethod
+    def handle_post_save(instance, created, using, **kwargs):
+        if isinstance(instance, Friends) and created:
+            if Friends.objects.filter(user=instance.user).count() == 1:
+                BaseAward.objects.get(name=PopularUser.name).users.add(instance.user)
 
     class Meta:
         proxy = True
