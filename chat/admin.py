@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin import StackedInline
 
 from chat.models import Message, Chat, ChatMembership
 
@@ -12,6 +13,12 @@ class MessageAdmin(admin.ModelAdmin):
         ('chat', admin.RelatedOnlyFieldListFilter)
     )
 
+class MessageInline(StackedInline):
+    model = Message
+    ordering = ("-created_at", )
+    extra = 1
+
+
 
 @admin.register(Chat)
 class ChatAdmin(admin.ModelAdmin):
@@ -19,6 +26,7 @@ class ChatAdmin(admin.ModelAdmin):
     list_filter = (
         ('author', admin.RelatedFieldListFilter),
     )
+    inlines = (MessageInline, )
 
 
 @admin.register(ChatMembership)

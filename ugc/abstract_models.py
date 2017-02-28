@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 
 # Create your models here.
@@ -33,5 +34,6 @@ class Dated(CreatedAt, UpdatedAt):
 
 
 class LikeAble(models.Model):
+    likes = GenericRelation('Like')
     class Meta:
         abstract = True
