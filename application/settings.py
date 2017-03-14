@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'rest_framework',
+    'social_django',
     'core.apps.CoreConfig',
     'ugc',
     'friendship',
@@ -141,3 +142,14 @@ REST_FRAMEWORK = {
     ],
     'PAGE_SIZE': 10
 }
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = '5924703'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'bTaz9wPxrrH1rrfP4cCq'
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = []

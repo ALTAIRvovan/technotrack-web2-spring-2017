@@ -20,11 +20,13 @@ from api.routes import router
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api/v1/', include(router.urls, namespace="api"))
+    url(r'^api/v1/', include(router.urls, namespace="api")),
+    url('auth/oauth/', include('social_django.urls', namespace='social')),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
+
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ]
