@@ -10,6 +10,9 @@ from awards.models import BaseAward
 class Post(Authored, Dated, FeedAble, LikeAble, models.Model):
     text = models.CharField(max_length=1024, verbose_name="post text")
 
+    def content(self):
+        return self.text
+
     def feed_author(self):
         return self.author
 

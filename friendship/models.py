@@ -19,3 +19,6 @@ class Friends(FeedAble, models.Model):
 
     def feed_author(self):
         return self.user
+
+    def content(self):
+        return "Ваш друг подружился с " + str(self.friend)

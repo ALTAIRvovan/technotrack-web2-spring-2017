@@ -4,11 +4,9 @@ from django.db import models
 
 
 class FeedAble(models.Model):
-    """
-    @abstractmethod
     def content(self):
         pass
-    """
+
 
     @abstractmethod
     def feed_author(self):
