@@ -15,7 +15,7 @@ class UserListViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = (permissions.IsAuthenticated, )
 
     @list_route(methods=['get', 'put'])
-    def me(self, request):
+    def setting(self, request):
         serializer = None
         if request.method == 'PUT':
             serializer = self.get_serializer(request.user, data=request.data)
@@ -23,7 +23,7 @@ class UserListViewSet(viewsets.ReadOnlyModelViewSet):
             serializer.save()
         else:
             serializer = FullUserSerializer(request.user)
-        return Response(data=serializer.data)
+        return Response(serializer.data)
 
     def get_serializer(self, *args, **kwargs):
         serializer_class = None
