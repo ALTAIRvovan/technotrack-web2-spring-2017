@@ -13,6 +13,7 @@ class UserListViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ShortUserSerializer
     queryset = User.objects.all()
     permission_classes = (permissions.IsAuthenticated, )
+    lookup_url_kwarg = 'user_id'
 
     @list_route(methods=['get', 'put'])
     def setting(self, request):
