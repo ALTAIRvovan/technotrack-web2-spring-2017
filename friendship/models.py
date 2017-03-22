@@ -9,6 +9,9 @@ class FriendShip(Authored, Dated, models.Model):
     recipient = models.ForeignKey(User, related_name="friend_applications", verbose_name="user responded request")
     approved = models.BooleanField(verbose_name="is approved", default=False)
 
+    class Meta:
+        unique_together = ('author', 'recipient')
+
 
 # TODO: Тут что-то надо делать =(
 # TODO: Добавить класс Meta и verbose_name в нем

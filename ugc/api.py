@@ -19,4 +19,4 @@ class PostViewSet(viewsets.ModelViewSet):
         return super().perform_create(serializer)
 
 
-router.register("users/(?P<user_id>[^/.]+)/posts", PostViewSet, "posts")
+router.register("users/(?P<user_id>[^/.]+)/posts", PostViewSet, "user-posts")
