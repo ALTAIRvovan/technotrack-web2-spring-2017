@@ -3,10 +3,13 @@ from .models import User
 
 
 class UserAuthorSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name')
+
+
+class AuthoredSerializerMixin(serializers.Serializer):
+    author = UserAuthorSerializer(many=False, read_only=True)
 
 
 class ShortUserSerializer(serializers.ModelSerializer):
