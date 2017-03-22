@@ -1,0 +1,24 @@
+{
+  "name": "track-frontend-spring",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ALTAIRvovan/technotrack-web2-spring-2017.git"
+  },
+  "author": "Vladimir Panov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ALTAIRvovan/technotrack-web2-spring-2017/issues"
+  },
+  "homepage": "https://github.com/ALTAIRvovan/technotrack-web2-spring-2017#readme",
+
+  "devDependencies": {
+    "webpack": "^2.3.1"
+  }
+}
