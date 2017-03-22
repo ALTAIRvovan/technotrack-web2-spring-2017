@@ -27,7 +27,7 @@ class ChatMembership(CreatedAt, models.Model):
     user = models.ForeignKey(User)
     inviter = models.ForeignKey(
         User,
-        related_name="inviter",
+        related_name="+",
         verbose_name="chat inviter"
     )
 
