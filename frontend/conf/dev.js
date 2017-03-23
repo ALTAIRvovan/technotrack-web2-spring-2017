@@ -21,8 +21,8 @@ module.exports = function (env) {
                 '/api': 'http://localhost:8081'
             },
             contentBase: [
-                path.join(__dirname, 'public'),
-                path.join(__dirname, 'static')
+                path.join(__dirname, '../public'),
+                path.join(__dirname, '../static')
             ], // boolean | string | array, static file location
             compress: false, // enable gzip compression
             //historyApiFallback: true, // true for index.html upon 404, object for multiple paths

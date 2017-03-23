@@ -25,6 +25,10 @@ module.exports = function () {
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
                     loader: 'babel-loader?presets[]=es2015&presets[]=react'
+                },
+                {
+                    test: /\.scss$/,
+                    loader: 'style!css!sass?outputStyle=compressed'
                 }
 
             ],
@@ -38,6 +42,19 @@ module.exports = function () {
         },
         plugins: [
             HtmlWebpackPluginConfig,
+            new webpack.LoaderOptionsPlugin({
+                options: {
+                    sassLoader: {
+                        includePaths: [
+                            './node_modules',
+                            // this is required only for NPM < 3.
+                            // Dependencies are flat in NPM 3+ so pointing to
+                            // the internal grommet/node_modules folder is not needed
+                        ]
+                    }
+                }
+            })
         ],
+
     };
 };
