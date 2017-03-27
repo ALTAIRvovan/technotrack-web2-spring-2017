@@ -27,8 +27,11 @@ class SidebarComponent extends React.Component {
                         <Anchor href='/user'>
                             User
                         </Anchor>
-                        <Anchor href='/third'>
-                            Third
+                        <Anchor href='/friends'>
+                            Friends
+                        </Anchor>
+                        <Anchor href='/login'>
+                            Login
                         </Anchor>
                     </Menu>
                 </Box>

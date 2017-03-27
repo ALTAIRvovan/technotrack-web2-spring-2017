@@ -6,6 +6,7 @@ import Article from 'grommet/components/Article';
 import Section from 'grommet/components/Section';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import Layer from 'grommet/components/Layer';
 
 import {getPageByPath} from "../helpers";
 
@@ -59,12 +60,61 @@ const POSTS_BY_USER = {
 const USER_LIST = {
     1: {
         id: 1,
+        username: 'altairvovan',
         last_name: 'Panov',
         first_name: 'Vladimir',
         email: 'volodka.1995@mail.ru',
 
     },
+    3: {
+        id: 3,
+        username: 'zayavitel',
+        last_name: 'Заявитель',
+        first_name: 'Заявлев',
+        email: 'test@test.ru'
+    }
 };
+
+const FRIENDS_TO_USER = {
+    1: [
+        {
+            "url": "http://track.my/api/v1/users/2/",
+            "username": "test1",
+            "first_name": "Test1",
+            "last_name": "Testovich"
+        },
+        {
+            "url": "http://track.my/api/v1/users/3/",
+            "username": "test2",
+            "first_name": "Test2",
+            "last_name": "Testovich"
+        },
+        {
+            "url": "http://track.my/api/v1/users/4/",
+            "username": "test4",
+            "first_name": "Test4",
+            "last_name": "Testovich"
+        }
+    ]
+};
+
+const FRIENDS_OUT_REQUESTS = [
+    {
+        "id": 6,
+        "author": 1,
+        "recipient": 4,
+        "approved": false
+    }
+];
+
+const FRIENDS_REQUESTS = [
+    {
+        "id": 7,
+        "author": 3,
+        "recipient": 1,
+        "approved": false
+    }
+];
 
 class AppContainer extends React.Component {
 
@@ -79,6 +129,17 @@ class AppContainer extends React.Component {
             isFetching: false,
             list: POSTS_BY_USER,
         },
+        friends: {
+            isFetching: false,
+            list: FRIENDS_TO_USER,
+            requests: FRIENDS_REQUESTS,
+            out_requests: FRIENDS_OUT_REQUESTS,
+        },
+
+        layer: {
+            isOpen: false,
+            content: null,
+        }
     };
 
     getCurrentUser = () => {
@@ -106,11 +167,22 @@ class AppContainer extends React.Component {
         this.setState(newState);
     };
 
+    closeLayer = () => {
+        this.setState({layer: {isOpen: false}});
+    };
+
+    openLayer = (content) => {
+        this.setState({layer: {isOpen: true, content}});
+    };
+
     methods = {
         methods: {
             posts: {
                 add: this.currentUserAddPost,
             },
+            layer: {
+                open: this.openLayer
+            }
         },
     };
 
@@ -120,6 +192,15 @@ class AppContainer extends React.Component {
     };
 
     render() {
+        let layer = null;
+        if (this.state.layer.isOpen) {
+            layer = (
+                <Layer closer={true}
+                       flush={false}
+                       onClose={this.closeLayer}>
+                    {this.state.layer.content}
+                </Layer>)
+        }
         return (
             <App>
                 <Header/>
@@ -134,6 +215,7 @@ class AppContainer extends React.Component {
                         { this.state.currentPage }
                     </Section>
                 </Split>
+                {layer}
             </App>);
     }
 }

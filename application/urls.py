@@ -16,12 +16,16 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
+from django.contrib.auth import views
+from django.views.decorators.csrf import csrf_exempt
+
 from api.routes import router
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/', include(router.urls, namespace="api")),
-    url('auth/oauth/', include('social_django.urls', namespace='social')),
+    url('^auth/oauth/', include('social_django.urls', namespace='social')),
+    url('^api/auth/', include('core.urls', namespace='auth'))
 ]
 
 if settings.DEBUG:
