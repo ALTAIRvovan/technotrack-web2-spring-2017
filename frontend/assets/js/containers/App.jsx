@@ -11,58 +11,58 @@ import {getPageByPath} from "../helpers";
 
 const test = "testTaAT";
 
-const POSTS_BY_USER = [
-    {
-        "id": 4,
-        "text": "glkfjdlkjgld2222",
-        "updated_at": "2017-03-22T13:11:39.613418Z",
-        "author": {
-            "id": 1,
-            "first_name": "Владимир",
-            "last_name": "Панов"
+const POSTS_BY_USER = {
+    1: [
+        {
+            "id": 4,
+            "text": "glkfjdlkjgld2222",
+            "updated_at": "2017-03-22T13:11:39.613418Z",
+            "author": {
+                "id": 1,
+                "first_name": "Владимир",
+                "last_name": "Панов"
+            }
+        },
+        {
+            "id": 3,
+            "text": "glkfjdlkjgld",
+            "updated_at": "2017-03-22T13:07:23.875949Z",
+            "author": {
+                "id": 1,
+                "first_name": "Владимир",
+                "last_name": "Панов"
+            }
+        },
+        {
+            "id": 2,
+            "text": "teskgkjsrlkgjdrlhgkd",
+            "updated_at": "2017-03-22T13:02:08.756202Z",
+            "author": {
+                "id": 1,
+                "first_name": "Владимир",
+                "last_name": "Панов"
+            }
+        },
+        {
+            id: 1,
+            text: "test12",
+            updated_at: "2017-03-22T13:01:51.818620Z",
+            author: {
+                "id": 1,
+                "first_name": "Владимир",
+                "last_name": "Панов"
+            }
         }
-    },
-    {
-        "id": 3,
-        "text": "glkfjdlkjgld",
-        "updated_at": "2017-03-22T13:07:23.875949Z",
-        "author": {
-            "id": 1,
-            "first_name": "Владимир",
-            "last_name": "Панов"
-        }
-    },
-    {
-        "id": 2,
-        "text": "teskgkjsrlkgjdrlhgkd",
-        "updated_at": "2017-03-22T13:02:08.756202Z",
-        "author": {
-            "id": 1,
-            "first_name": "Владимир",
-            "last_name": "Панов"
-        }
-    },
-    {
-        id: 1,
-        text: "test12",
-        updated_at: "2017-03-22T13:01:51.818620Z",
-        author: {
-            "id": 1,
-            "first_name": "Владимир",
-            "last_name": "Панов"
-        }
-    }
-];
+    ]
+};
 
 const USER_LIST = {
     1: {
+        id: 1,
         last_name: 'Panov',
         first_name: 'Vladimir',
         email: 'volodka.1995@mail.ru',
-        posts: {
-            isFetching: false,
-            list: POSTS_BY_USER,
-        },
+
     },
 };
 
@@ -74,11 +74,15 @@ class AppContainer extends React.Component {
             isFetching: false,
             list: USER_LIST,
             currentUserId: 1
-        }
+        },
+        posts: {
+            isFetching: false,
+            list: POSTS_BY_USER,
+        },
     };
 
     getCurrentUser = () => {
-        console.log(this.state);
+        // console.log(this.state);
         let userId = this.state.users.currentUserId;
         if (userId === null) {
             return null;
@@ -88,21 +92,17 @@ class AppContainer extends React.Component {
 
 
     currentUserAddPost = (post_text) => {
+        console.log(post_text);
         let user = this.getCurrentUser();
-        console.log(user);
-        let posts = user.posts.list;
-        posts.push({text: post_text, author: user});
+        // console.log(user);
+        let posts_list = this.state.posts.list[user.id];
+        posts_list.push({text: post_text, author: user, id: posts_list.length});
         let newState = {
-            users: {
+            posts: {
                 list: {}
             }
         };
-
-        let obj = {
-            posts: {}
-        };
-        obj.posts.list = posts;
-        newState.users.list[this.state.users.currentUserId] = obj;
+        newState.posts.list[user.id] = posts_list;
         this.setState(newState);
     };
 

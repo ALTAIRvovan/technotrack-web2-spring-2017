@@ -16,8 +16,8 @@ class CreatePostForm extends React.Component {
     };
 
     inputPostText = (text) => {
-        console.log(text);
-        this.setState({post_text: text})
+        // console.log(text.target.value);
+        this.setState({post_text: text.target.value})
     };
 
     submitForm = (event) => {

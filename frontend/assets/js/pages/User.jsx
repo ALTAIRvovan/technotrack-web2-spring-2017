@@ -27,7 +27,7 @@ class UserPage extends React.Component {
             <div style={{width: '100%'}}>
                 <FullUserInfo user={currentUser}/>
                 <CreatePostForm createPost={this.props.methods.posts.add}/>
-                <PostList posts={currentUser.posts.list}/>
+                <PostList posts={this.props.posts.list[currentUser.id]}/>
             </div>);
     }
 }
