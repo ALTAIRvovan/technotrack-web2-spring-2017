@@ -13,21 +13,23 @@ class UserPage extends React.Component {
 
     getCurrentUser = () => {
         console.log(this.props);
-        let userId = this.props.users.currentUserId;
+        let userId = this.props.parent_state.users.currentUserId;
         if (userId === null) {
             return null;
         }
-        return this.props.users.list[userId];
+        return this.props.parent_state.users.list[userId];
     };
 
     render() {
         //basis="full" size={{width: 'full'}}
         let currentUser = this.getCurrentUser();
+        let posts = this.props.parent_state.posts.list;
+        console.log(posts);
         return (
             <div style={{width: '100%'}}>
                 <FullUserInfo user={currentUser}/>
-                <CreatePostForm createPost={this.props.methods.posts.add}/>
-                <PostList posts={this.props.posts.list[currentUser.id]}/>
+                <CreatePostForm createPost={this.props.other.methods.posts.add}/>
+                <PostList posts={posts[currentUser.id]}/>
             </div>);
     }
 }

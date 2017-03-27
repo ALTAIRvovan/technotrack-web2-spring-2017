@@ -12,7 +12,10 @@ const mapPathToPages = {
 };
 
 export function getPageByPath(path, state, other_props = null) {
-    let props = Object.assign({}, state, other_props);
+    let props = {
+        parent_state: state,
+        other: other_props
+    };
     return React.createElement(mapPathToPages[path], props);
 }
 
