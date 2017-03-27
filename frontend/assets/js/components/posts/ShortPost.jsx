@@ -4,17 +4,26 @@
 
 import React from 'react';
 import AuthorInfo from '../user/AuthorInfo';
-import ListItem from 'grommet/components/ListItem';
 import Paragraph from 'grommet/components/Paragraph';
 
 
 class ShortPost extends React.Component {
+    openLayer = (event) => {
+        if(this.props.openLayer) {
+            event.preventDefault();
+            let content = <ShortPost post={this.props.post}/>;
+            this.props.openLayer(content);
+        }
+
+    };
+
     render() {
         return (
-            <ListItem direction="column" align="start" colorIndex="accent-2-t" basis="full">
+            <div>
                 <AuthorInfo user={this.props.post.author}/>
-                <Paragraph>{this.props.post.text}</Paragraph>
-            </ListItem>);
+                <Paragraph onClick={this.openLayer}>{this.props.post.text}</Paragraph>
+            </div>
+        );
     }
 }
 

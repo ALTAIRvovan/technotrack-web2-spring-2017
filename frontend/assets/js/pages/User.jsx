@@ -29,7 +29,7 @@ class UserPage extends React.Component {
             <div style={{width: '100%'}}>
                 <FullUserInfo user={currentUser}/>
                 <CreatePostForm createPost={this.props.other.methods.posts.add}/>
-                <PostList posts={posts[currentUser.id]}/>
+                <PostList posts={posts[currentUser.id]} openLayer={this.props.other.methods.layer.open} />
             </div>);
     }
 }
