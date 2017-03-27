@@ -6,6 +6,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleTracker = require('webpack-bundle-tracker');
 
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -24,11 +25,15 @@ module.exports = function () {
                 {
                     test: /\.jsx?$/,
                     exclude: /node_modules/,
-                    loader: 'babel-loader?presets[]=es2015&presets[]=react'
+                    loader: 'babel-loader',
                 },
                 {
                     test: /\.scss$/,
                     loader: 'style!css!sass?outputStyle=compressed'
+                },
+                {
+                    test: /\.css$/,
+                    loader: 'style!css'
                 }
 
             ],
@@ -40,6 +45,9 @@ module.exports = function () {
             ],
             extensions: [".js", ".json", ".jsx", ".css"],
         },
+        resolveLoader: {
+            moduleExtensions: ["-loader"]
+        },
         plugins: [
             HtmlWebpackPluginConfig,
             new webpack.LoaderOptionsPlugin({
@@ -47,13 +55,12 @@ module.exports = function () {
                     sassLoader: {
                         includePaths: [
                             './node_modules',
-                            // this is required only for NPM < 3.
-                            // Dependencies are flat in NPM 3+ so pointing to
-                            // the internal grommet/node_modules folder is not needed
                         ]
                     }
                 }
-            })
+            }),
+            new BundleTracker({path: __dirname, filename: '../assets/webpack-stats.json'}),
+            new webpack.NoEmitOnErrorsPlugin()
         ],
 
     };

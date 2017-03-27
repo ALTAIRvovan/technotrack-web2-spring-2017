@@ -44,7 +44,14 @@ module.exports = function (env) {
             }),
             new webpack.LoaderOptionsPlugin({
                 minimize: false,
-                debug: true
+                debug: true,
+                options: {
+                    sassLoader: {
+                        includePaths: [
+                            './node_modules',
+                        ]
+                    }
+                }
             }),
         ]
     })

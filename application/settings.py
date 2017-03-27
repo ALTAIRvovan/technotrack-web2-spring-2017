@@ -28,7 +28,7 @@ SECRET_KEY = config.get('main', 'SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['track.my']
+ALLOWED_HOSTS = ['track.my', 'localhost']
 
 # Application definition
 
