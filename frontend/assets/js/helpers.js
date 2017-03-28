@@ -15,11 +15,26 @@ const mapPathToPages = {
     "/login": Login,
 };
 
-export function getPageByPath(path, state, other_props = null) {
-    let props = {
-        parent_state: state,
-        other: other_props
-    };
-    return React.createElement(mapPathToPages[path], props);
+export function getPageByPath(path, state, methods = null) {
+    switch (path) {
+        case "/feed":
+            return <Feed currentUser={state.users.currentUserId}
+                         feed={state.feed}
+                         updateFeed={methods.feed.update}
+                         layerOpen={methods.layer.open}/>;
+        case "/user":
+            return <User createPost={methods.posts.add}
+                         layerOpen={methods.layer.open}
+                         posts={state.posts}
+                         users={state.users}/>;
+        case "/friends":
+            return <Friends userList={state.users.list}
+                            currentUserId={state.users.currentUserId}
+                            friends={state.friends}/>;
+        case "/login":
+            return <Login/>;
+        default:
+            alert("PAGE NOT FOUND");
+    }
 }
 

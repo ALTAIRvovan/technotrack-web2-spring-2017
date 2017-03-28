@@ -18,4 +18,4 @@ class FeedSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Feed
-        fields = ('content_object', 'author', 'updated_at')
+        fields = ('id', 'content_object', 'author', 'updated_at')

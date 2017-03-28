@@ -119,7 +119,7 @@ const FRIENDS_REQUESTS = [
 class AppContainer extends React.Component {
 
     state = {
-        currentPage: null,
+        currentPage: '/feed',
         users: {
             isFetching: false,
             list: USER_LIST,
@@ -134,6 +134,9 @@ class AppContainer extends React.Component {
             list: FRIENDS_TO_USER,
             requests: FRIENDS_REQUESTS,
             out_requests: FRIENDS_OUT_REQUESTS,
+        },
+        feed: {
+            list: {},
         },
 
         layer: {
@@ -157,7 +160,7 @@ class AppContainer extends React.Component {
         let user = this.getCurrentUser();
         // console.log(user);
         let posts_list = this.state.posts.list[user.id];
-        posts_list.push({text: post_text, author: user, id: posts_list.length});
+        posts_list.push({text: post_text, author: user, id: posts_list.length + 1});
         let newState = {
             posts: {
                 list: {}
@@ -175,20 +178,35 @@ class AppContainer extends React.Component {
         this.setState({layer: {isOpen: true, content}});
     };
 
+    updateFeed = () => {
+        console.log("update");
+        let options = {
+            method: 'GET',
+            mode: "same-origin",
+            credentials: "same-origin",
+            redirect: "follow"
+        };
+        fetch(`/api/v1/users/${this.state.users.currentUserId}/feed/`, options)
+            .then(response => response.json())
+            .then((response) => response.results)
+            .then((results) => this.setState({feed: {list: results}}))
+    };
+
     methods = {
-        methods: {
-            posts: {
-                add: this.currentUserAddPost,
-            },
-            layer: {
-                open: this.openLayer
-            }
+        posts: {
+            add: this.currentUserAddPost,
         },
+        layer: {
+            open: this.openLayer
+        },
+        feed: {
+            update: this.updateFeed
+        }
     };
 
     onMenuElementClick = (path) => {
         console.log(path);
-        this.setState({currentPage: getPageByPath(path, this.state, this.methods)});
+        this.setState({currentPage: path});
     };
 
     render() {
@@ -201,6 +219,7 @@ class AppContainer extends React.Component {
                     {this.state.layer.content}
                 </Layer>)
         }
+        let page = getPageByPath(this.state.currentPage, this.state, this.methods)
         return (
             <App>
                 <Header/>
@@ -212,7 +231,7 @@ class AppContainer extends React.Component {
                              basis="full"
                              wrap={true}
                     >
-                        { this.state.currentPage }
+                        { page }
                     </Section>
                 </Split>
                 {layer}

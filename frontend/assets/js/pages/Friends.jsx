@@ -13,8 +13,8 @@ import FriendRequestInfo from '../components/friends/FriendReqestInfo';
 class FriendsPage extends React.Component {
     getFriends = () => {
         let friends_list = null;
-        let user_id = this.props.parent_state.users.currentUserId;
-        let prop_frineds = this.props.parent_state.friends;
+        let user_id = this.props.currentUserId;
+        let prop_frineds = this.props.friends;
         if (prop_frineds && prop_frineds.list != null && prop_frineds.list[user_id] != null) {
             friends_list = prop_frineds.list[user_id];
         }
@@ -23,9 +23,9 @@ class FriendsPage extends React.Component {
 
     getRequets = () => {
         let friends_list = null;
-        let prop_frineds = this.props.parent_state.friends;
+        let prop_frineds = this.props.friends;
         if (prop_frineds && prop_frineds.requests != null) {
-            let users = this.props.parent_state.users.list;
+            let users = this.props.userList;
             friends_list = prop_frineds.requests.map(element => (users[element.author]));
         }
         return friends_list;
@@ -43,5 +43,11 @@ class FriendsPage extends React.Component {
         );
     }
 }
+
+FriendsPage.propTypes = {
+    currentUserId: React.PropTypes.number.isRequired,
+    friends: React.PropTypes.object.isRequired,
+    userList: React.PropTypes.object.isRequired,
+};
 
 export default FriendsPage;
