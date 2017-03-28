@@ -33,6 +33,12 @@ class SidebarComponent extends React.Component {
                         <Anchor href='/login'>
                             Login
                         </Anchor>
+                        <Anchor href='/chats'>
+                            ChatList
+                        </Anchor>
+                        <Anchor href='/chat_info'>
+                            ChatInfo
+                        </Anchor>
                     </Menu>
                 </Box>
             </Sidebar>

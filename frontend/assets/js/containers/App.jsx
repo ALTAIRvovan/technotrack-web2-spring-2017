@@ -116,6 +116,91 @@ const FRIENDS_REQUESTS = [
     }
 ];
 
+const CHAT_LIST = {
+    1: {
+        "id": 1,
+        "name": "test1",
+        "members": [
+            {
+                "url": "http://track.my/api/v1/users/3/",
+                "username": "test3",
+                "first_name": "test3",
+                "last_name": ""
+            },
+            {
+                "url": "http://track.my/api/v1/users/1/",
+                "username": "altair",
+                "first_name": "Владимир",
+                "last_name": "Панов"
+            },
+            {
+                "url": "http://track.my/api/v1/users/2/",
+                "username": "test1",
+                "first_name": "Друг",
+                "last_name": "Другов"
+            }
+        ],
+        "author": {
+            "id": 1,
+            "first_name": "Владимир",
+            "last_name": "Панов"
+        }
+    },
+    5: {
+        "id": 5,
+        "name": "test234",
+        "members": [
+            {
+                "url": "http://track.my/api/v1/users/1/",
+                "username": "altair",
+                "first_name": "Владимир",
+                "last_name": "Панов"
+            },
+            {
+                "url": "http://track.my/api/v1/users/2/",
+                "username": "test1",
+                "first_name": "Друг",
+                "last_name": "Другов"
+            }
+        ],
+        "author": {
+            "id": 1,
+            "first_name": "Владимир",
+            "last_name": "Панов"
+        }
+    }
+};
+
+const CHAT_MESSAGES = {
+    1: {
+        1: {
+            "id": 1,
+            "subject": "test",
+            "text": "g;dfklkhj",
+            "author": 1,
+            "created_at": "2017-03-22T12:46:58.218001Z",
+            "chat_id": 1
+        },
+        2: {
+            "id": 2,
+            "subject": "test",
+            "text": "g;message23",
+            "author": 1,
+            "created_at": "2017-03-22T12:46:58.218001Z",
+            "chat_id": 1
+        },
+        3: {
+            "id": 3,
+            "subject": "test",
+            "text": "g;message33",
+            "author": 1,
+            "created_at": "2017-03-22T12:46:58.218001Z",
+            "chat_id": 1
+        }
+
+    }
+};
+
 class AppContainer extends React.Component {
 
     state = {
@@ -137,6 +222,11 @@ class AppContainer extends React.Component {
         },
         feed: {
             list: {},
+        },
+
+        chats: {
+            list: CHAT_LIST,
+            messages: CHAT_MESSAGES,
         },
 
         layer: {
@@ -192,6 +282,10 @@ class AppContainer extends React.Component {
             .then((results) => this.setState({feed: {list: results}}))
     };
 
+    createMessageToChat = (message, chat) => {
+        console.log(message)
+    };
+
     methods = {
         posts: {
             add: this.currentUserAddPost,
@@ -201,6 +295,9 @@ class AppContainer extends React.Component {
         },
         feed: {
             update: this.updateFeed
+        },
+        chat: {
+            createMessage: this.createMessageToChat
         }
     };
 

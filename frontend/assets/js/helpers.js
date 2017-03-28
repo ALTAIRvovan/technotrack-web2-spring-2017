@@ -7,13 +7,9 @@ import Feed from 'pages/Feed';
 import User from 'pages/User';
 import Friends from 'pages/Friends';
 import Login from 'pages/Login';
+import ChatList from 'pages/ChatList';
+import ChatInfo from 'pages/ChatInfo';
 
-const mapPathToPages = {
-    "/feed": Feed,
-    "/user": User,
-    "/friends": Friends,
-    "/login": Login,
-};
 
 export function getPageByPath(path, state, methods = null) {
     switch (path) {
@@ -33,6 +29,12 @@ export function getPageByPath(path, state, methods = null) {
                             friends={state.friends}/>;
         case "/login":
             return <Login/>;
+        case "/chats":
+            return <ChatList chats={state.chats.list}/>;
+        case "/chat_info":
+            return <ChatInfo chat={ state.chats.list[1] }
+                             messages={state.chats.messages[1] }
+                             createMessage={methods.chat.createMessage}/>;
         default:
             alert("PAGE NOT FOUND");
     }
