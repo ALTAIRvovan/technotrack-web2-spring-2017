@@ -15,11 +15,22 @@ class FriendsList extends React.Component {
         let prop_friends = this.props.friends;
         let component = this.props.component;
         if (prop_friends) {
-            friends_list = prop_friends.map(element => (
-                <ListItem key={element.username}>
-                    {React.createElement(component, {user:element})}
-                </ListItem>)
-            );
+            if (prop_friends instanceof Array) {
+                friends_list = prop_friends.map(element => (
+                    <ListItem key={element.username}>
+                        {React.createElement(component, {user: element})}
+                    </ListItem>)
+                );
+            } else {
+                friends_list = [];
+                for (let index in prop_friends) {
+                    let element = prop_friends[index];
+                    friends_list.push(
+                        <ListItem key={index}>
+                            {React.createElement(component, {user: element})}
+                        </ListItem>);
+                }
+            }
         }
         return (
             <List>
@@ -30,7 +41,7 @@ class FriendsList extends React.Component {
 }
 
 FriendsList.propTypes = {
-    friends: React.PropTypes.array.isRequired,
+    friends: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.object]).isRequired,
     component: React.PropTypes.func.isRequired,
 };
 

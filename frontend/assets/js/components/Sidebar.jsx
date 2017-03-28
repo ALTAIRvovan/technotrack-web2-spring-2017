@@ -39,6 +39,9 @@ class SidebarComponent extends React.Component {
                         <Anchor href='/chat_info'>
                             ChatInfo
                         </Anchor>
+                        <Anchor href='/search'>
+                            Search
+                        </Anchor>
                     </Menu>
                 </Box>
             </Sidebar>

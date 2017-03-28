@@ -9,6 +9,7 @@ import Friends from 'pages/Friends';
 import Login from 'pages/Login';
 import ChatList from 'pages/ChatList';
 import ChatInfo from 'pages/ChatInfo';
+import UserSearchPage from 'pages/UserSearchPage';
 
 
 export function getPageByPath(path, state, methods = null) {
@@ -35,6 +36,9 @@ export function getPageByPath(path, state, methods = null) {
             return <ChatInfo chat={ state.chats.list[1] }
                              messages={state.chats.messages[1] }
                              createMessage={methods.chat.createMessage}/>;
+
+        case "/search":
+            return <UserSearchPage doSearch={methods.search.doSearch} users={state.users.list}/>;
         default:
             alert("PAGE NOT FOUND");
     }

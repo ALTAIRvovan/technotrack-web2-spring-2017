@@ -286,6 +286,10 @@ class AppContainer extends React.Component {
         console.log(message)
     };
 
+    doSearchUsers = (text) => {
+        console.log(text);
+    }
+
     methods = {
         posts: {
             add: this.currentUserAddPost,
@@ -298,6 +302,9 @@ class AppContainer extends React.Component {
         },
         chat: {
             createMessage: this.createMessageToChat
+        },
+        search: {
+            doSearch: this.doSearchUsers,
         }
     };
 
