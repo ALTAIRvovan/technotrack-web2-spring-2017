@@ -288,7 +288,7 @@ class AppContainer extends React.Component {
 
     doSearchUsers = (text) => {
         console.log(text);
-    }
+    };
 
     methods = {
         posts: {
@@ -323,7 +323,7 @@ class AppContainer extends React.Component {
                     {this.state.layer.content}
                 </Layer>)
         }
-        let page = getPageByPath(this.state.currentPage, this.state, this.methods)
+        let page = getPageByPath(this.state.currentPage, this.state, this.methods);
         return (
             <App>
                 <Header/>
